@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@drawable/ic_menu_video"
+            android:title="Ver video de Youtube" />
+        <item
+            android:id="@+id/nav_calendario"
+            android:icon="@drawable/ic_menu_calendario"
+            android:title="Consultar calendario" />
+        <item
+            android:id="@+id/nav_mapa"
+            android:icon="@drawable/ic_menu_mapa"
+            android:title="Ver Google Maps" />
+        <item
+            android:id="@+id/nav_grafica"
+            android:icon="@drawable/ic_menu_grafica"
+            android:title="Mostrar gráfica lineal" />
+    </group>
+
+</menu>

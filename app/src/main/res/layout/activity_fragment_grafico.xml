@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/txt_titulo"
         android:layout_width="match_parent"
-        android:layout_height="179dp"
+        android:layout_height="83dp"
         android:fontFamily="cursive"
         android:gravity="center"
         android:text="Gráfica lineal"
@@ -19,5 +19,6 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/linechart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="467dp"
+        android:layout_gravity="top" />
 </LinearLayout>

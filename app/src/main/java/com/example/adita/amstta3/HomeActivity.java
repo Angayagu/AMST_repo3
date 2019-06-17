@@ -1,8 +1,10 @@
 package com.example.adita.amstta3;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -20,14 +25,21 @@ import com.github.mikephil.charting.charts.LineChart;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         DrawerLayout.DrawerListener {
-
+    private Fragment fragment;
+    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
+    private FloatingActionButton fab_main, fab_verde, fab_amarillo;
+    private Animation fab_open, fab_close, fab_clock, fab_anticlock;
+    TextView textview_verde, textview_amarillo;
+
+    Boolean isOpen = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -54,6 +66,60 @@ public class HomeActivity extends AppCompatActivity
                         Toast.LENGTH_SHORT).show();
             }
         });
+
+        fab_main = findViewById(R.id.fab_main); fab_main.bringToFront();
+        fab_verde = findViewById(R.id.fab_verde); fab_verde.bringToFront();
+        fab_amarillo = findViewById(R.id.fab_amarillo); fab_amarillo.bringToFront();
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_clock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_clock);
+        fab_anticlock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_anticlock);
+
+        textview_verde = (TextView) findViewById(R.id.txt_verde);
+        textview_amarillo = (TextView) findViewById(R.id.txt_amarillo);
+
+        fab_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isOpen) {
+                    textview_verde.setVisibility(View.INVISIBLE);
+                    textview_amarillo.setVisibility(View.INVISIBLE);
+                    fab_verde.startAnimation(fab_close);
+                    fab_amarillo.startAnimation(fab_close);
+                    fab_main.startAnimation(fab_anticlock);
+                    fab_amarillo.setClickable(false);
+                    fab_verde.setClickable(false);
+                    isOpen = false;
+                } else {
+                    textview_verde.setVisibility(View.VISIBLE);
+                    textview_amarillo.setVisibility(View.VISIBLE);
+                    fab_verde.startAnimation(fab_open);
+                    fab_amarillo.startAnimation(fab_open);
+                    fab_main.startAnimation(fab_clock);
+                    fab_verde.setClickable(true);
+                    fab_amarillo.setClickable(true);
+                    isOpen = true;
+                }
+
+            }
+        });
+
+
+        fab_amarillo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toolbar.setBackgroundColor(Color.YELLOW);
+            }
+        });
+        fab_verde.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toolbar.setBackgroundColor(Color.GREEN);
+
+            }
+        });
+
     }
 
     @Override
@@ -68,7 +134,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         boolean fragmentTransaction = false;
-        Fragment fragment = null;
 
         switch (menuItem.getItemId()) {
             case R.id.nav_video:

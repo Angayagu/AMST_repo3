@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private FloatingActionButton fab_main, fab_verde, fab_amarillo;
     private Animation fab_open, fab_close, fab_clock, fab_anticlock;
+    private Fragment fragment2;
     TextView textview_verde, textview_amarillo;
 
     Boolean isOpen = false;

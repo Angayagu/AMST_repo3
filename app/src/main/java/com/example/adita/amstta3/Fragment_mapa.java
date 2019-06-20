@@ -16,7 +16,8 @@ public class Fragment_mapa extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        //app no se cae todavia
+        boolean b;
         return inflater.inflate(R.layout.activity_fragment_mapa, container, false);
     }
 }

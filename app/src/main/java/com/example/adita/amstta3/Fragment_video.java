@@ -1,17 +1,18 @@
 package com.example.adita.amstta3;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.MediaController;
-import android.widget.VideoView;
 
-import com.github.mikephil.charting.charts.LineChart;
+import java.util.Vector;
 
 public class Fragment_video extends Fragment {
-    private LineChart mChart;
+    RecyclerView recyclerView;
+    Vector<YouTubeVideos> youtubeVideos = new Vector<YouTubeVideos>();
+
     public Fragment_video() {
         // Required empty public constructor
     }
@@ -21,22 +22,25 @@ public class Fragment_video extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.activity_fragment_video, container, false);
-        mChart = (LineChart) view.findViewById(R.id.linechart);
-        mChart.setTouchEnabled(true);
-        mChart.setPinchZoom(true);
-
         creacionVideo(view);
+
         // Inflate the layout for this fragment
         return view;
     }
-    VideoView videoyoutube;
+
 
     public void creacionVideo(View vi) {
-        Uri uri = Uri.parse("rtsp://r4---sn-q4fl6nlr.googlevideo.com/Cj0LENy73wIaNAlahqGbPHCHuBMYDSANFC1LpAZdMOCoAUIASARg6If39aTb84xaigELUG5hLXM2N080bW8M/9E44583B98D8B7A75E0CD2E4E2E4B8873F99EEE2.7E9B712D6ADDE137CC8282D9B39109C9DF5323F1/yt8/1/video.3gp");
-        videoyoutube.setMediaController(new MediaController(getContext()));
-        videoyoutube.setVideoURI(uri);
-        videoyoutube.requestFocus();
-        videoyoutube.start();
 
+        recyclerView = (RecyclerView) vi.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
+
+        youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/6oQ5AXLCk-U\" frameborder=\"0\" allowfullscreen></iframe>") );
+        youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/eRLJscAlk1M\" frameborder=\"0\" allowfullscreen></iframe>") );
+        youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/cfzmjgpx-VE\" frameborder=\"0\" allowfullscreen></iframe>") );
+
+        VideoAdapter videoAdapter = new VideoAdapter(youtubeVideos);
+
+        recyclerView.setAdapter(videoAdapter);
     }
 }

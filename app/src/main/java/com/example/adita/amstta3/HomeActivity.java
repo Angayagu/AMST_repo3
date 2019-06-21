@@ -3,24 +3,22 @@ package com.example.adita.amstta3;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.mikephil.charting.charts.LineChart;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -134,7 +132,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         boolean fragmentTransaction = false;
-
         switch (menuItem.getItemId()) {
             case R.id.nav_video:
                 fragment = new Fragment_video();
@@ -145,7 +142,7 @@ public class HomeActivity extends AppCompatActivity
                 fragmentTransaction = true;
                 break;
             case R.id.nav_mapa:
-                fragment = new Fragment_mapa();
+                fragment = new MapsActivity();
                 fragmentTransaction = true;
                 break;
             case R.id.nav_grafica:
@@ -157,12 +154,6 @@ public class HomeActivity extends AppCompatActivity
         }
 
         if(fragmentTransaction) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.home_content, fragment).commit();
-            setTitle(menuItem.getTitle());
-        }
-        else{
-            fragment = HomeContentFragment.newInstance("SELECCIONE UNA OPCIÓN DEL MENÚ");
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.home_content, fragment).commit();
             setTitle(menuItem.getTitle());

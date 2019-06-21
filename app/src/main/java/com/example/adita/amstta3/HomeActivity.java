@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -146,6 +147,11 @@ public class HomeActivity extends AppCompatActivity
                 fragmentTransaction = true;
                 break;
             case R.id.nav_mapa:
+//                FragmentManager fm = getFragmentManager();
+//                FragmentTransaction fragmentTransaction1 = fm.beginTransaction();
+//                fragmentTransaction1.replace(R.id.frameLayout, new Fragment_mapa());
+//                fragmentTransaction1.commit();
+
                 fragment = new Fragment_mapa();
                 fragmentTransaction = true;
                 break;

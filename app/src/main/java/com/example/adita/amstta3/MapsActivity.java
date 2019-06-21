@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Map;
 
 public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
@@ -47,19 +52,15 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng cali = new LatLng(3.4383, -76.5161);
-        googleMap.addMarker(new MarkerOptions()
-                .position(cali)
-                .title("Cali la Sucursal del cielo"));
-
-        CameraPosition cameraPosition = CameraPosition.builder()
-                .target(cali)
-                .zoom(10)
-                .build();
-
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
-        //Do your stuff here
+        UiSettings uiSettings = mMap.getUiSettings();
+        uiSettings.setZoomControlsEnabled(true);
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-2.1462955 ,-79.9682957);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Aqui Estoy").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        Toast.makeText(getContext(),"posicionando",Toast.LENGTH_LONG).show();
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
